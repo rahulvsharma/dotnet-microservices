@@ -9,14 +9,11 @@ namespace Play.Catalog.Service.Controllers
     [Route("items")]
     public class ItemsController : ControllerBase
     {
-        
+        private readonly IRepository<Item> itemsRepository;
 
-        private readonly IItemsRepository itemsRepository;
-
-        public ItemsController(IItemsRepository _itemsRepository)
+        public ItemsController(IRepository<Item> _itemsRepository)
         {
             itemsRepository = _itemsRepository;
-            
         }
 
         [HttpGet]
@@ -53,9 +50,9 @@ namespace Play.Catalog.Service.Controllers
                 return NotFound();
             }
 
-                existingItem.Name = updateItemDto.Name;
-                existingItem.Description = updateItemDto.Description;
-                existingItem.Price = updateItemDto.Price;
+            existingItem.Name = updateItemDto.Name;
+            existingItem.Description = updateItemDto.Description;
+            existingItem.Price = updateItemDto.Price;
 
             await itemsRepository.UpdateAsync(existingItem);
             return NoContent();
@@ -69,7 +66,7 @@ namespace Play.Catalog.Service.Controllers
             if(item == null){
                 return NotFound();
             }
-            await itemsRepository.RemoveAsync(item.Id.Value);
+            await itemsRepository.RemoveAsync(item.Id);
 
             return NoContent();
         }

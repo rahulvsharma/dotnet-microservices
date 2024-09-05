@@ -1,4 +1,6 @@
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Play.Catalog.Service.Entities;
 
@@ -12,13 +14,11 @@ namespace Play.Catalog.Service.Repositories
 
         private readonly FilterDefinitionBuilder<Item> filterBuilder = Builders<Item>.Filter;
 
-        public ItemsRepository()
+        public ItemsRepository(IOptions<CatalogDatabaseSettings> catalogDatabaseSettings)
         {
-            var mongoClient = new MongoClient("mongodb://localhost:2707");
-            var database = mongoClient.GetDatabase("Catalog");
-            dbCollection = database.GetCollection<Item>(collectionName);
-
-            
+            var mongoClient = new MongoClient(catalogDatabaseSettings.Value.ConnectionString); // new MongoClient("mongodb://localhost:27017");
+            var database = mongoClient.GetDatabase(catalogDatabaseSettings.Value.DatabaseName); // mongoClient.GetDatabase("Catalog");
+            dbCollection = database.GetCollection<Item>(catalogDatabaseSettings.Value.ItemsCollectionName); // database.GetCollection<Item>(collectionName);
         }
 
         public async Task<IReadOnlyCollection<Item>> GetAllAsync()
@@ -26,7 +26,7 @@ namespace Play.Catalog.Service.Repositories
             return await dbCollection.Find(filterBuilder.Empty).ToListAsync();
         }
 
-        public async Task<Item> GetAsync (Guid id)
+        public async Task<Item> GetAsync (ObjectId id)
         {
             FilterDefinition<Item> filter = filterBuilder.Eq(entity => entity.Id, id);
             return await dbCollection.Find(filter).FirstOrDefaultAsync();
@@ -54,7 +54,7 @@ namespace Play.Catalog.Service.Repositories
             await dbCollection.ReplaceOneAsync(filter, entity);
         }
 
-        public async Task RemoveAsync(Guid id)
+        public async Task RemoveAsync(ObjectId id)
         {
             FilterDefinition<Item> filter = filterBuilder.Eq(entity => entity.Id, id);
             await dbCollection.DeleteOneAsync(filter);

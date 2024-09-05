@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using Play.Catalog.Service.Dtos;
 using Play.Catalog.Service.Entities;
 using Play.Catalog.Service.Repositories;
@@ -12,9 +11,9 @@ namespace Play.Catalog.Service.Controllers
     {
         
 
-        private readonly ItemsRepository itemsRepository;
+        private readonly IItemsRepository itemsRepository;
 
-        public ItemsController(ItemsRepository _itemsRepository)
+        public ItemsController(IItemsRepository _itemsRepository)
         {
             itemsRepository = _itemsRepository;
             
@@ -27,8 +26,8 @@ namespace Play.Catalog.Service.Controllers
             return items;
         }
 
-        [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<ItemDto>> GetByIdAsync(ObjectId id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ItemDto>> GetByIdAsync(Guid id)
         {
             var item =  (await itemsRepository.GetAsync(id)).AsDto();
             
@@ -40,14 +39,14 @@ namespace Play.Catalog.Service.Controllers
 
         [HttpPost]
         public async Task<ActionResult<ItemDto>> PostAsync(CreateItemDto createItemDto){
-            var item = new Item {Id = ObjectId.GenerateNewId(), Name= createItemDto.Name, Description = createItemDto.Description, Price = createItemDto.Price, CreatedDate = DateTimeOffset.Now};
+            var item = new Item {Id = Guid.NewGuid(), Name= createItemDto.Name, Description = createItemDto.Description, Price = createItemDto.Price, CreatedDate = DateTimeOffset.Now};
             await itemsRepository.CreateAsync(item);
 
             return CreatedAtAction(nameof(GetByIdAsync), new {id = item.Id}, item.AsDto());
         }
 
-        [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> PutAsync(ObjectId id, UpdateItemDto updateItemDto){
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAsync(Guid id, UpdateItemDto updateItemDto){
             var existingItem = await itemsRepository.GetAsync(id);
 
             if(existingItem == null){
@@ -63,8 +62,8 @@ namespace Play.Catalog.Service.Controllers
 
         }
 
-        [HttpDelete("{id:length(24)}")]
-        public async Task<IActionResult> DeleteAsync(ObjectId id){
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(Guid id){
             var item = await itemsRepository.GetAsync(id);
 
             if(item == null){

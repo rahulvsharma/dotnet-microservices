@@ -9,14 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<CatalogDatabaseSettings>(builder.Configuration.GetSection("CatalogDatabase"));
+// builder.Services.AddSingleton<IRepository<Item>, MongoRepository<Item>>();
 
-builder.Services.AddSingleton<IRepository<Item>, MongoRepository<Item>>();
 builder.Services.AddControllers(options => {
     options.SuppressAsyncSuffixInActionNames = false;
 });
-BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
-// BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
-// BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
+// BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
+// BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
+
+builder.Services.AddMongo().AddMongoRepository<Item>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

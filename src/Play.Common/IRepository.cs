@@ -1,7 +1,6 @@
 using System.Linq.Expressions;
-using Play.Catalog.Service.Entities;
 
-namespace Play.Catalog.Service.Repositories
+namespace Play.Common
 {
     public interface IRepository<T> where T : IEntity
     {

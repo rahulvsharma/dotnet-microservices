@@ -13,11 +13,9 @@ namespace Play.Catalog.Service.Repositories
             BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
             BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
 
-        
-            // services. serviceProvider => {
-                // var configuration = serviceProvider.GetService<IConfiguration>();
-                // return services.Configure<CatalogDatabaseSettings>(configuration.GetSection("CatalogDatabase"));
-            // });
+            var serviceProvider = services.BuildServiceProvider();
+            var configuration = serviceProvider.GetService<IConfiguration>();
+            services.Configure<CatalogDatabaseSettings>(configuration.GetSection("CatalogDatabase"));
 
             return services;
 

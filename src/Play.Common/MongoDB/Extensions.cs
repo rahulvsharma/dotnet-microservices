@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
@@ -24,7 +25,7 @@ namespace Play.Common.MongoDB
 
         public static IServiceCollection AddMongoRepository<T>(this IServiceCollection services) where T : IEntity
         {
-            services.AddSingleton<IRepository<Item>, MongoRepository<Item>>();
+            services.AddSingleton<IRepository<T>, MongoRepository<T>>();
             return services;
         }
     }

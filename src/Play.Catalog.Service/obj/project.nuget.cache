@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "staDJxueyf9OQYp1RugU/A9XJny28qPdgok0KfbnO7lRAkKANQDma9XYA599cqWmA9YjCJzQ6K4LGhV6AN7e0Q==",
+  "dgSpecHash": "LHRTBk2I09UINn4Zsmo/k+kDLR7gDmMLiBgrMlrZpebbu0XlRVgNA0Ses6/GeQE77vuE3kCXGeb6+4I3AJmaeA==",
   "success": true,
   "projectFilePath": "/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Catalog.Service/Play.Catalog.Service.csproj",
   "expectedPackageFiles": [

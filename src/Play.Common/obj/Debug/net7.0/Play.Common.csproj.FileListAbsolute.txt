@@ -1,0 +1,12 @@
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/obj/Debug/net7.0/Play.Common.csproj.AssemblyReference.cache
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/obj/Debug/net7.0/Play.Common.GeneratedMSBuildEditorConfig.editorconfig
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/obj/Debug/net7.0/Play.Common.AssemblyInfoInputs.cache
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/obj/Debug/net7.0/Play.Common.AssemblyInfo.cs
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/obj/Debug/net7.0/Play.Common.csproj.CoreCompileInputs.cache
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/bin/Debug/net7.0/Play.Common.deps.json
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/bin/Debug/net7.0/Play.Common.dll
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/bin/Debug/net7.0/Play.Common.pdb
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/obj/Debug/net7.0/Play.Common.dll
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/obj/Debug/net7.0/refint/Play.Common.dll
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/obj/Debug/net7.0/Play.Common.pdb
+/Users/rahul/Documents/Projects/dotnet-microservices/src/Play.Common/obj/Debug/net7.0/ref/Play.Common.dll

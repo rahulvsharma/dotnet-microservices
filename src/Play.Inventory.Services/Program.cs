@@ -17,6 +17,12 @@ builder.Services.AddHttpClient<CatalogClient>(client => {
     onRetry : (OutcomeType, TimeSpan, retryAttempt) => {
     }
 ))
+.AddTransientHttpErrorPolicy(builder => builder.CircuitBreakerAsync(
+    3,
+    TimeSpan.FromSeconds(15),
+    onBreak: (outcome, timeSpan, retryAttempt) => {},
+    onReset: () => {}
+))
 .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(1));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
